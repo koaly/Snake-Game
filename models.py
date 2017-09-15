@@ -1,4 +1,15 @@
+DIR_UP = 1
+DIR_RIGHT = 2
+DIR_DOWN = 3
+DIR_LEFT = 4
+ 
+DIR_OFFSET = { DIR_UP: (0,1),
+               DIR_RIGHT: (1,0),
+               DIR_DOWN: (0,-1),
+               DIR_LEFT: (-1,0) }
+
 class Snake:
+    BLOCK_SIZE = 16
     MOVE_WAIT = 0.4
     def __init__(self, world, x, y):
         self.world = world
@@ -6,7 +17,8 @@ class Snake:
         self.y = y
 
         self.wait_time = 0
- 
+        self.direction = DIR_UP
+
     def update(self, delta):
         self.wait_time += delta
         
@@ -15,7 +27,11 @@ class Snake:
 
         if self.x > self.world.width:
             self.x = 0
-        self.x += 16
+        if self.y > self.world.height:
+            self.y = 0
+        self.x += self.BLOCK_SIZE * DIR_OFFSET[self.direction][0]
+        self.y += self.BLOCK_SIZE * DIR_OFFSET[self.direction][1]
+        
         self.wait_time = 0
  
  
