@@ -42,6 +42,9 @@ class Snake:
         self.y += self.BLOCK_SIZE * DIR_OFFSET[self.direction][1]
         
         self.wait_time = 0
+
+        self.body = [(self.x, self.y)] + self.body
+        self.body.pop()
  
  
 class World:
