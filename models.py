@@ -54,7 +54,7 @@ class Snake:
         if self.y > self.world.height:
             self.y = 0
         elif self.y < 0:
-            self.x = self.world.height
+            self.y = self.world.height
         self.x += self.BLOCK_SIZE * DIR_OFFSET[self.direction][0]
         self.y += self.BLOCK_SIZE * DIR_OFFSET[self.direction][1]
         
@@ -89,3 +89,5 @@ class World:
 
         if self.snake.can_eat(self.heart):
             self.heart.random_position()
+            self.snake.body += [(self.snake.x-self.snake.length*Snake.BLOCK_SIZE, self.snake.y)]
+            self.snake.length += 1
